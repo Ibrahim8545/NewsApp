@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:newsapp/models/article_maodel.dart';
 
 class NewsTitles extends StatelessWidget {
-  const NewsTitles({super.key});
+  const NewsTitles({super.key, required this.articleModel});
+ final  ArticleModel articleModel;
 
   @override
   Widget build(BuildContext context) {
@@ -9,21 +11,20 @@ class NewsTitles extends StatelessWidget {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(6.0),
-          child: Image.network(
-            'https://www.presidency.eg/media/93877/%D8%A7%D9%84%D8%B1%D8%A6%D9%8A%D8%B3-%D8%B9%D8%A8%D8%AF-%D8%A7%D9%84%D9%81%D8%AA%D8%A7%D8%AD-%D8%A7%D9%84%D8%B3%D9%8A%D8%B3%D9%8A-black-one-finljpg.jpg',
+          child:articleModel.image!=null ? Image.network(
+           articleModel.image!,
            height:200,
            width: double.infinity,
            fit: BoxFit.fill,
-          ),
+          )
+          :Image.asset('assets/images/business.png.jpg'),
         ),
         const SizedBox(
             height:12,
           ),
-          const Text(
-            'مصر ترا ترا مصر  مصر ترا ترا مصر مصر ترا ترا مصر مصر ترا ترا مصر مصر ترا ترا مصر مصر ترا ترا مصر مصر ترا ترا مصر مصر ترا ترا مصر مصر ترا ترا مصر مصر ترا ترا مصر مصر ترا ترا مصر ',
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
+          Text(
+            articleModel.mainTitle,
+            style:const  TextStyle(
               color: Colors.black,
               fontSize: 20,
               fontWeight: FontWeight.w500
@@ -32,10 +33,9 @@ class NewsTitles extends StatelessWidget {
           const SizedBox(
             height:8,
           ),
-          const Text(
-            'واللي اللي اللي و اللي  واللي اللي اللي و اللي واللي اللي اللي و اللي رواللي اللي اللي و اللي واللي اللي اللي و اللي ',
-            maxLines: 2,
-            style: TextStyle(
+          Text(
+            articleModel.subTitle!,
+            style: const TextStyle(
               color: Colors.grey,
               fontSize: 14,
             ),
